@@ -4,9 +4,6 @@
 #include <vector>
 using namespace std;
 
-
-
-
 int intInput(const string& msg){
     while (true) {
         cout << msg;
@@ -39,7 +36,6 @@ class Book {
 
     void   search(vector<Book>&books) {
     int ID = intInput("Enter the book ID to search :-") ;
-    cout << " Enter the book ID to search :-";
     for(auto &it: books){
         if( it.ID == ID) {
         
@@ -54,9 +50,7 @@ class Book {
 }
 
 void searcht(vector<Book>&books) {
-    string title;
-    cout << "Enter the title to check the book :-";
-    getline(cin,title);
+    string title =  str("Enter the title to check the book :-");
     for(auto &it: books){
         if( it.Title == title) {
             cout << it.ID << "|" 
@@ -155,5 +149,3 @@ int main (){
 
     }
 }
-    
-    
