@@ -3,6 +3,12 @@
 #include <string>
 using namespace std;
 
+void addbooks(const string& filename);
+void display(const string& filename);
+void search(const string& filename);
+void searcht(const string& filename);
+
+
 int intInput(const string& msg){
     while (true) {
         cout << msg;
@@ -62,16 +68,18 @@ void searcht(const string& filename) {
     
     ifstream file(filename);
     if(!file){
-        cout << "There is no file we can't do the search operation";
+        cout << "File not found. Please add books first.\n";
         return;
     }
     else{
         string title =   str("Enter the title to check the book :-");
         string line;
         while(getline(file,line)){
-            string extractedTitle = line.substr(line.find(',') + 1,
-                                    line.find(',', line.find(',') + 1) - line.find(',') - 1);
-
+            size_t first = line.find(',');
+            if (first == string::npos) continue;
+            size_t second = line.find(',', first + 1);
+            if (second == string::npos) continue;
+            string extractedTitle = line.substr(first + 1, second - first - 1);
             if(extractedTitle == title){
                 cout << line <<endl;
                 return;
