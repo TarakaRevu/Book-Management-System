@@ -1,22 +1,33 @@
-Version 3 – Book Management System (C++)
-🔹 Overview
+Version 4 – Book Management System (C++)
+Overview
 
-Version 3 transforms the Book Management System into an interactive, menu-driven console application.
-This version improves usability, program structure, and stability while maintaining an in-memory data model.
+Version 4 adds file handling to the Book Management System.
+Book data is now saved in a file so it is not lost when the program exits.
+This version also improves input handling and program stability.
 
-✨ Features
+Features
 
-📋 Menu-Driven Interface
+Menu-driven console application
 
-Interactive switch-case based menu.
+Add books and save them to a file (library.txt)
 
-Program runs continuously until the user selects Exit.
+Display all books from the file
 
-➕ Add Books
+Search books by ID
 
-Users can add book details dynamically during runtime.
+Search books by title
 
-Each book contains:
+Data persists between program runs
+
+Safe input handling using getline and validation
+
+Robust file parsing to avoid crashes
+
+Clean program exit
+
+Book Details Stored
+
+Each book record contains:
 
 Book ID
 
@@ -26,24 +37,19 @@ Author
 
 Publication Year
 
-📚 Display All Books
+Concepts Used
 
-Displays all stored books from memory.
+File handling (ifstream, ofstream)
 
-Shows ID, title, and author for each book.
+Input validation
 
-🔍 Search Book by ID
+String parsing with delimiters
 
-Allows users to search for a book using its unique ID.
+Basic error handling
 
-Displays book details if found.
+Foundation for RAII concepts
 
-🔍 Search Book by Title
+Summary
 
-Allows users to search for a book using the book title.
-
-Displays matching book details.
-
-🚪 Exit Option
-
-Clean program termination via menu option.
+Version 4 moves the project from in-memory storage to file-based storage.
+It makes the application more reliable and closer to a real-world program.
