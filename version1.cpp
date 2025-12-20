@@ -1,12 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 
-void addbooks(const string& filename);
-void display(const string& filename);
-void search(const string& filename);
-void searcht(const string& filename);
+
 
 
 int intInput(const string& msg){
@@ -39,103 +37,109 @@ class Book {
         
     };
 
-
-void   search(const string& filename) {
-    ifstream file(filename);
-    if(!file){
-        cout << "There is no file we can't do the search operation";
-        return;
-    }else{
-        string line;
-        int ID = intInput("Enter the Id to search:-");
-        while(getline(file,line)){
-            size_t pos = line.find(',');
-            if (pos == string::npos) continue;
-            int fileID = stoi(line.substr(0, pos));
-            if (fileID == ID){
-            cout << "Book found: " << line << endl;
+    void   search(vector<Book>&books) {
+    int ID = intInput("Enter the book ID to search :-") ;
+    cout << " Enter the book ID to search :-";
+    for(auto &it: books){
+        if( it.ID == ID) {
+        
+            cout << it.ID << "|" 
+            << it.Title << " " 
+            << it.Author << endl;
             return;
-            }
-
-
         }
-        cout << "with that ID i can't find a book";
+        
     }
-    
-    
+    cout << "BOOk Not found with that ID" << endl;
 }
-void searcht(const string& filename) {
-    
-    ifstream file(filename);
-    if(!file){
-        cout << "File not found. Please add books first.\n";
-        return;
-    }
-    else{
-        string title =   str("Enter the title to check the book :-");
-        string line;
-        while(getline(file,line)){
-            size_t first = line.find(',');
-            if (first == string::npos) continue;
-            size_t second = line.find(',', first + 1);
-            if (second == string::npos) continue;
-            string extractedTitle = line.substr(first + 1, second - first - 1);
-            if(extractedTitle == title){
-                cout << line <<endl;
-                return;
-            }
 
+void searcht(vector<Book>&books) {
+    string title;
+    cout << "Enter the title to check the book :-";
+    getline(cin,title);
+    for(auto &it: books){
+        if( it.Title == title) {
+            cout << it.ID << "|" 
+            << it.Title << " " 
+            << it.Author << endl;
+            return;
         }
+        
     }
+
     cout << "BOOk Not found with that title" << endl;
-    
 }
-void display(const string& filename){
-    ifstream file(filename);
-    if(!file){
-        cout << "There is no file we can't do the dispaly operation";
-        return;
-    }else{
-        string line;
-        while(getline(file,line)){
-            cout << line <<endl;
-        }
-
+void display(vector<Book>&books){
+    for(auto &it: books){
+        cout << it.ID << "|" 
+        << it.Title << " " 
+        << it.Author << endl;
     }
 }
-void addbooks(const string& filename) {
+void addbooks(vector<Book> &books) {
     cout << "We are adding the books so please enter the details "<<endl;
-    ofstream file(filename, ios::app);
     Book b1;
     b1.ID = intInput(" Enter the book ID :-");
     b1.Title = str( "Enter the book Title :-");
     b1.Author = str( "Enter the book Author :-");
     b1.year = intInput("Enter the book year :-");
-    file << b1.ID <<","
-        << b1.Title <<","
-        << b1.Author <<","
-        << b1.year <<endl;
+    books.push_back(b1);
+
+}
+bool loadmem(const string& filename,vector<Book> &books){
+    ifstream file(filename);
+    if(!file){
+        return false;
+    }else{
+       string line;
+        while(getline(file,line)){
+            if (line.empty()) continue;
+
+        Book b1;
+
+        size_t first = line.find(',');
+        if (first == string::npos) continue;
+
+        size_t second = line.find(',', first + 1);
+        if (second == string::npos) continue;
+
+        size_t third = line.find(',', second + 1);
+        if (third == string::npos) continue;
+
+        b1.ID = stoi(line.substr(0, first));
+        b1.Title = line.substr(first + 1, second - first - 1);
+        b1.Author = line.substr(second + 1, third - second - 1);
+        b1.year = stoi(line.substr(third + 1));
+
+        books.push_back(b1);
+           
+
+        }
+        file.close();
+        return true;
+    }
 
 }
 
 int main (){
-    string input;
+    vector<Book> books;
+    bool ans = loadmem("library.txt",books);
     while(true) {
         cout << "\n1. Add Book\n2. Display Books\n3. Search by ID\n4. Search by Title\n5. Exit\n";
         int num = intInput("Enter the case for the switch :-");
         switch (num)
         {
         case 1:
-            addbooks("library.txt");
+            addbooks(books);
             break;
         case 2:
-            display("library.txt");
+            display(books);
             break;
         case 3:
-            search("library.txt");
+            search(books);
             break;
         case 4:
-            searcht("library.txt");
+            searcht(books);
             break;
         case 5:
             cout << "Exiting program\n";
