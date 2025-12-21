@@ -4,9 +4,6 @@
 #include <vector>
 using namespace std;
 
-
-
-
 int intInput(const string& msg){
     while (true) {
         cout << msg;
@@ -170,8 +167,6 @@ bool loadmem(const string& filename,vector<Book> &books){
         b1.copies = stoi(line.substr(fourth + 1));
 
         books.push_back(b1);
-           
-
         }
         file.close();
         return true;
@@ -234,17 +229,11 @@ int main (){
         case 7:
             savemem("library.txt", books);
             cout << "Exiting program\n";
-            return 0;
-            
-        
+            return 0; 
         default:
             cout << " enter the correct option";
             break;
         }
-      
-
-
     }
 }
-    
-    
+

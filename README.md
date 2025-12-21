@@ -1,55 +1,64 @@
-Version 4 – Book Management System (C++)
-Overview
+# 📚 Book Management System (C++)
 
-Version 4 adds file handling to the Book Management System.
-Book data is now saved in a file so it is not lost when the program exits.
-This version also improves input handling and program stability.
+A console-based **Book Management System** built in C++ to practice real-world programming concepts step by step.
 
-Features
+This project is developed incrementally from **basic C++** to more **advanced design concepts**.
 
-Menu-driven console application
+---
 
-Add books and save them to a file (library.txt)
+## 🚀 Version 6 – Full CRUD with Copies Management
 
-Display all books from the file
+### 🔹 Overview
+Version 6 completes the core functionality of the application by adding **Delete** and **Update** operations and introducing **copies management** for each book.
 
-Search books by ID
+The system now behaves like a **real library or inventory application**.
 
-Search books by title
+---
 
-Data persists between program runs
+## ✨ Features
 
-Safe input handling using getline and validation
+### ➕ Add Book
+Add a new book with:
+- **Book ID**
+- **Title**
+- **Author**
+- **Publication Year**
+- **Number of Copies**
 
-Robust file parsing to avoid crashes
+If a book with the same **ID already exists**:
+- Copies are increased instead of creating a duplicate record
 
-Clean program exit
+---
 
-Book Details Stored
+### 📚 Display Books
+- Displays all books stored in memory
+- Shows:
+  - **ID | Title | Author | Year | Copies**
 
-Each book record contains:
+---
 
-Book ID
+### 🔍 Search
+- Search by **Book ID**
+- Search by **Book Title**
 
-Title
+---
 
-Author
+### 🗑️ Delete Book (ID-based)
+- If **copies > 1** → decreases copy count
+- If **copies == 1** → removes the book completely
 
-Publication Year
+---
 
-Concepts Used
+### ✏️ Update Book (ID-based)
+Allows updating:
+- **Title**
+- **Author**
+- **Publication Year**
+- **Copies**
 
-File handling (ifstream, ofstream)
+---
 
-Input validation
-
-String parsing with delimiters
-
-Basic error handling
-
-Foundation for RAII concepts
-
-Summary
-
-Version 4 moves the project from in-memory storage to file-based storage.
-It makes the application more reliable and closer to a real-world program.
+### 💾 Persistent Storage
+- Books are loaded from file at program start
+- All changes are saved back to file on exit
+- File format:
