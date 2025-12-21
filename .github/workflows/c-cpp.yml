@@ -11,13 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Compile C++ project
+    - name: Compile all C++ files
       run: |
-        g++ -std=c++17 main.cpp -o book_manager
-
-    - name: Run program
-      run: |
-        ./book_manager
+        g++ -std=c++17 $(find . -name "*.cpp") -o book_manager
