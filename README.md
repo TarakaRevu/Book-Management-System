@@ -6,15 +6,54 @@ This project is developed incrementally from **basic C++** to more **advanced de
 
 ---
 
-## 🚀 Version 6 – Full CRUD with Copies Management
+---
+
+## 🚀 Version 7 – Object-Oriented Design (Library System)
 
 ### 🔹 Overview
-Version 6 completes the core functionality of the application by adding **Delete** and **Update** operations and introducing **copies management** for each book.
+Version 7 focuses on **design improvement** rather than adding new features.
 
-The system now behaves like a **real library or inventory application**.
+The application is refactored using **Object-Oriented Programming (OOP)** by introducing a central **Library** class that manages all books, operations, and file handling.
+
+This makes the code more **structured, maintainable, and scalable**.
 
 ---
 
+## 🧱 Key Improvements
+
+### 🏛️ Library Class
+- Introduced a **Library** class that represents the whole system
+- The Library class:
+  - Owns the book collection
+  - Handles add, delete, update, search, and display
+  - Manages file loading and saving
+
+---
+
+### 🔐 Encapsulation
+- The book list is now **private** inside the Library class
+- `main()` cannot directly access or modify book data
+- All interactions happen through Library methods
+
+---
+
+### 🧠 Abstraction
+- `main()` no longer knows how books are stored or processed
+- It only calls high-level operations like:
+  - Add book
+  - Search book
+  - Delete book
+
+---
+
+### 🎛️ Simplified Main Function
+- `main()` is responsible only for:
+  - Displaying the menu
+  - Taking user input
+  - Calling Library functions
+- Business logic is fully removed from `main()`
+
+---
 ## ✨ Features
 
 ### ➕ Add Book
